@@ -1,0 +1,218 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ project.title }}</title>
+  <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #2b1055, #19002e);
+      color: #fff;
+    }
+
+    header {
+      background: #161623;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    .project-detail {
+      background: rgba(255, 255, 255, 0.05);
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 2rem 3rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+    }
+
+    .project-detail h2 {
+      font-size: 2rem;
+      border-bottom: 2px solid #0ef;
+      padding-bottom: 0.5rem;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .main-image-container {
+      width: 100%;
+      max-height: 300px;
+      overflow: hidden;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .main-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .description {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-list {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: 0;
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .tech-list li {
+      background: #0ef;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+
+    .tech-list img {
+      height: 24px;
+      margin-right: 8px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .caption {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-top: 0.3rem;
+    }
+
+    .btn, .back-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      background-color: #0ef;
+      color: black;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover, .back-link:hover {
+      background-color: #00bcd4;
+    }
+
+    .back-link {
+      margin-left: 1rem;
+      background-color: transparent;
+      color: #0ef;
+      border: 2px solid #0ef;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/" class="logo">Lawrence Marete</a>
+    <nav>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="project-detail">
+    <h2>{{ project.title }}</h2>
+
+    {% if project.image %}
+      <div class="main-image-container">
+        <img src="{{ project.image.url }}" alt="{{ project.title }} Screenshot">
+      </div>
+    {% endif %}
+
+    <p class="description">{{ project.description }}</p>
+
+    <h4>Technologies Used:</h4>
+    <ul class="tech-list">
+      {% for tech in project.tech.all %}
+        <li>
+          {% if tech.icon %}
+            <img src="{{ tech.icon.url }}" alt="{{ tech.name }}">
+          {% endif %}
+          {{ tech.name }}
+        </li>
+      {% endfor %}
+    </ul>
+
+    {% if project.images.all %}
+      <h4>Additional Screenshots:</h4>
+      <div class="gallery">
+        {% for img in project.images.all %}
+          <div>
+            <img src="{{ img.image.url }}" alt="{{ img.caption }}">
+            {% if img.caption %}
+              <p class="caption">{{ img.caption }}</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if project.github %}
+      <a href="{{ project.github }}" class="btn" target="_blank">🔗 View on GitHub</a>
+    {% endif %}
+
+    {% if project.live_demo %}
+      <a href="{{ project.live_demo }}" class="btn" target="_blank">🚀 Live Demo</a>
+    {% endif %}
+
+    <a href="{% url 'projects_list' %}" class="back-link">← Back to Projects</a>
+  </main>
+</body>
+</html>

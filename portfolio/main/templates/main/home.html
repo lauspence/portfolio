@@ -1,0 +1,115 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lawrence Marete — Software Developer Portfolio</title>
+  <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" />
+</head>
+<body>
+  <header>
+    <a href="/" class="logo">Lawrence Marete</a>
+    <span class="hamburger" aria-label="Toggle Navigation"><i class="fas fa-bars"></i></span>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="{% url 'projects_list' %}">Projects</a></li>
+        <li><a href="{% url 'blog' %}">Blog</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="profile-img-wrapper">
+        <img src="{% static 'main/image/lau.jpg' %}" alt="Lawrence Marete" class="profile-img">
+      </div>      
+      <h1>Lawrence Marete</h1>
+      <h2>Full-Stack Software Developer</h2>
+      <p>
+        Crafting innovative, scalable, and high-performance web applications with
+        expertise in Python, Django, JavaScript, React, and cloud technologies.
+        Dive into my portfolio to explore my work and passion for coding.
+      </p>
+      <div>
+        <a href="#projects" class="btn-primary" role="button" aria-label="View Projects">View Projects</a>
+        <a href="{% static 'main/files/resume.pdf' %}" class="btn-secondary" role="button" aria-label="Download Resume" download>Download Resume</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tech-stack">
+    <h3>My Tech Stack</h3>
+    <div class="tech-grid">
+      <div class="tech-item"><i class="fab fa-python"></i><span>Python</span></div>
+      <div class="tech-item"><i class="fas fa-code"></i><span>Django</span></div>
+      <div class="tech-item"><i class="fab fa-js-square"></i><span>JavaScript</span></div>
+      <div class="tech-item"><i class="fab fa-react"></i><span>React</span></div>
+      <div class="tech-item"><i class="fab fa-node-js"></i><span>Node.js</span></div>
+      <div class="tech-item"><i class="fab fa-aws"></i><span>AWS</span></div>
+      <div class="tech-item"><i class="fas fa-database"></i><span>PostgreSQL</span></div>
+      <div class="tech-item"><i class="fab fa-git-alt"></i><span>Git</span></div>
+    </div>
+  </section>
+
+  <section class="projects" id="projects">
+    <h3>Featured Projects</h3>
+    <div class="project-grid">
+      <div class="project-card">
+        <h4>Courier Management System</h4>
+        <p>A web application built with Python and Django, showcasing location-aware delivery app with real-time job creation and courier assignment.</p>
+        <a href="https://github.com" target="_blank">View on GitHub</a>
+      </div>
+      <div class="project-card">
+        <h4>Garage Billing System</h4>
+        <p>Manages garage service estimates, bills, and insurance processing using Django and Bootstrap for easy UI/UX.</p>
+        <a href="https://github.com" target="_blank">View on GitHub</a>
+      </div>
+      <div class="project-card">
+        <h4>E-commerce Web App</h4>
+        <p>A fully functional e-commerce website built with Django. Includes product listings, cart system, checkout with Stripe integration, and order management dashboard.</p>
+        <a href="https://github.com" target="_blank">View on GitHub</a>
+      </div>
+      <div class="project-card">
+        <h4>Sacco Management System</h4>
+        <p>A web-based system for managing Sacco operations. Includes member registration, savings tracking, loan applications, approvals, transactions, and financial reports. Built with Django and PostgreSQL.</p>
+        <a href="https://github.com/your-username/sacco-management-system" target="_blank">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <h3>Contact Me</h3>
+    <form method="post" action="{% url 'contact' %}" class="contact-form" aria-label="Contact Form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn-primary" aria-label="Send Message">Send Message</button>
+    </form>
+
+    {% if messages %}
+      {% for message in messages %}
+        <p style="color: green;">{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+
+    <p>© 2025 Lawrence Marete. All rights reserved.</p>
+    <div class="social-links">
+      <a href="https://github.com" target="_blank">GitHub</a>
+      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+      <a href="mailto:example@email.com">Email</a>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.hamburger').addEventListener('click', () => {
+      document.querySelector('nav').classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

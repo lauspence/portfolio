@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Testimonials</title>
+  <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #1a1a1a;
+      color: #fff;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-top: 60px;
+      margin-bottom: 40px;
+      font-size: 32px;
+      color: #333;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 0 40px 60px;
+    }
+
+    .testimonial-card {
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .testimonial-img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    .testimonial-message {
+      font-style: italic;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .testimonial-name {
+      font-weight: bold;
+      color: #222;
+    }
+
+    .testimonial-role {
+      font-size: 0.9em;
+      color: #888;
+    }
+
+    footer {
+      background-color: #1a1a1a;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo">Lawrence Muriithi</a>
+    <nav>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'blog' %}">Blog</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <h2 class="section-title" style="margin-top: 100px;">What People Say</h2>
+
+  <div class="testimonial-grid">
+    {% for t in testimonials %}
+      <div class="testimonial-card">
+        {% if t.image %}
+          <img src="{{ t.image.url }}" alt="{{ t.name }}" class="testimonial-img">
+        {% endif %}
+        <p class="testimonial-message">“{{ t.message }}”</p>
+        <h4 class="testimonial-name">{{ t.name }}</h4>
+        <small class="testimonial-role">{{ t.role }}</small>
+      </div>
+    {% endfor %}
+  </div>
+
+  <footer>
+    <p>&copy; {{ now|date:"Y" }} Lawrence Muriithi. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

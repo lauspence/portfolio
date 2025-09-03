@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Projects</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+  <style>
+    /* Minimal tweaks only — keeps your global animated background */
+    .project-card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      border-radius:8px;
+      margin-bottom:12px;
+      transition:transform .3s ease, box-shadow .3s ease;
+    }
+    .project-card img:hover{
+      transform:scale(1.03);
+      box-shadow:0 8px 20px rgba(255,111,145,0.35);
+    }
+    .tech-badge{
+      display:inline-block;
+      background:#ff6f91;
+      color:#fff;
+      padding:4px 10px;
+      border-radius:6px;
+      font-size:.8rem;
+      margin:0 6px 6px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/" class="logo">Lawrence Marete</a>
+    <nav>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="projects">
+    <h2>My Projects</h2>
+    <div class="project-grid">
+      {% for project in projects %}
+        <div class="project-card">
+          <h4>{{ project.title }}</h4>
+
+          {% if project.image %}
+            <img src="{{ project.image.url }}" alt="{{ project.title }} Image" loading="lazy">
+          {% endif %}
+
+          <p>{{ project.description|truncatewords:32 }}</p>
+
+          {% if project.tech.all %}
+            <div class="tech-stack">
+              {% for tech in project.tech.all %}
+                <span class="tech-badge">{{ tech.name }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          {% if project.github %}
+            <a href="{{ project.github }}" class="btn" target="_blank">View on GitHub</a>
+          {% endif %}
+          <a href="{% url 'project_detail' project.slug %}" class="btn">View Case Study</a>
+        </div>
+      {% endfor %}
+    </div>
+  </main>
+</body>
+</html>

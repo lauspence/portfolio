@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog - Lawrence Marete</title>
+  <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* General Reset and Layout */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header .logo {
+      font-weight: bold;
+      font-size: 24px;
+      text-decoration: none;
+      color: #3c80f6;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    nav ul li a:hover {
+      color: #3c80f6;
+    }
+
+    .blog-container {
+      max-width: 900px;
+      margin: 80px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      margin-bottom: 30px;
+      font-size: 32px;
+      color: #222;
+      text-align: center;
+    }
+
+    .blog-post {
+      background-color: #fff;
+      border-left: 4px solid #3c80f6;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+    }
+
+    .blog-post h3 {
+      margin-bottom: 5px;
+      color: #222;
+    }
+
+    .blog-post small {
+      color: #888;
+      font-size: 13px;
+    }
+
+    .blog-post p {
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .blog-post img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+      border-radius: 6px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      background-color: #3c80f6;
+      color: #fff;
+      padding: 6px 12px;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    .btn:hover {
+      background-color: #295dc0;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .blog-container {
+        margin-top: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo">Lawrence Marete</a>
+    <nav>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'blog' %}">Blog</a></li>
+        <li><a href="{% url 'testimonials' %}">Testimonials</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="blog-container">
+    <h2>My Blog</h2>
+
+    {% for post in posts %}
+      <div class="blog-post">
+        {% if post.image %}
+          <img src="{{ post.image.url }}" alt="{{ post.title }}">
+        {% endif %}
+
+        <h3>{{ post.title }}</h3>
+        <small>
+          By {{ post.author.username }} | 
+          {{ post.date_posted|date:"F j, Y" }}
+        </small>
+
+        <p>{{ post.content|truncatewords:50|safe }}</p>
+
+        <p>
+          <strong>Category:</strong> {{ post.category }} 
+          {% if post.tags %}
+            | <strong>Tags:</strong> {{ post.tags }}
+          {% endif %}
+        </p>
+
+        <a href="{% url 'blog_detail' post.slug %}" class="btn">Read More</a>
+      </div>
+    {% empty %}
+      <p>No blog posts yet. Stay tuned!</p>
+    {% endfor %}
+    
+  </main>
+
+</body>
+</html>
