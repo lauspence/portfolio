@@ -5,7 +5,7 @@
     buildCommand: |
       pip install -r requirements.txt
       python portfolio/manage.py collectstatic --noinput
-    startCommand: gunicorn portfolio.wsgi:application
+    startCommand: gunicorn portfolio.portfolio.wsgi:application
     envVars:
       - key: PYTHON_VERSION
         value: 3.12
