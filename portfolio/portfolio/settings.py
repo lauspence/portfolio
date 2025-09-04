@@ -53,7 +53,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'portfolio.portfolio.wsgi.application'
+WSGI_APPLICATION = 'portfolio.wsgi.application'
 
 # Database (SQLite for now; you can switch to Postgres on Render if needed)
 DATABASES = {
