@@ -5,9 +5,9 @@
     buildCommand: |
       pip install -r requirements.txt
       python portfolio/manage.py collectstatic --noinput
-    startCommand: gunicorn portfolio.portfolio.wsgi:application
+    startCommand: gunicorn portfolio.wsgi:application
     envVars:
       - key: PYTHON_VERSION
         value: 3.12
       - key: DJANGO_SETTINGS_MODULE
-        value: portfolio.portfolio.settings
+        value: portfolio.settings
