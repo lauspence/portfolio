@@ -15,6 +15,6 @@ from django.core.wsgi import get_wsgi_application
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(project_root)
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio.config.settings')
 
 application = get_wsgi_application()

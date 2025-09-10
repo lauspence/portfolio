@@ -6,9 +6,9 @@
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
       python manage.py migrate
-    startCommand: gunicorn portfolio.wsgi:application --chdir portfolio
+    startCommand: gunicorn portfolio.config.wsgi:application --chdir portfolio
     envVars:
       - key: PYTHON_VERSION
         value: 3.12
       - key: DJANGO_SETTINGS_MODULE
-        value: portfolio.settings
+        value: portfolio.config.settings
