@@ -11,3 +11,5 @@ env/
 # Static & media
 staticfiles/
 media/
+# Django staticfiles
+/staticfiles/
