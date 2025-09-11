@@ -1,19 +1,13 @@
-# Python
+# Django
 __pycache__/
-*.py[cod]
+*.pyc
+*.pyo
 *.sqlite3
-*.log
 
 # Environment
 env/
-*.env
+.env
 
-# Django
+# Static & media
+staticfiles/
 media/
-/staticfiles/
-
-# VSCode
-.vscode/
-
-# Ignore collected static files
-/portfolio/staticfiles/
