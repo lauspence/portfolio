@@ -10,7 +10,10 @@ env/
 
 # Django
 media/
-staticfiles/
+/staticfiles/
 
 # VSCode
 .vscode/
+
+# Ignore collected static files
+/portfolio/staticfiles/
