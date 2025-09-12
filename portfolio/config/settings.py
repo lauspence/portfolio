@@ -100,6 +100,16 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
+
+# CSRF trusted origins (important for admin login on Render)
+CSRF_TRUSTED_ORIGINS = [
+    "https://portfolio-ekb3.onrender.com",
+]
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -113,12 +123,16 @@ LOGGING = {
         'handlers': ['console'],
         'level': 'ERROR',
     },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',  # show info logs
+            'propagate': True,
+        },
+        'django.security.Authentication': {
+            'handlers': ['console'],
+            'level': 'DEBUG',  # log authentication attempts
+            'propagate': False,
+        },
+    },
 }
-
-# CSRF trusted origins (important for admin login on Render)
-CSRF_TRUSTED_ORIGINS = [
-    "https://portfolio-ekb3.onrender.com",
-]
-
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
