@@ -104,8 +104,8 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 # CSRF trusted origins (important for admin login on Render)
 CSRF_TRUSTED_ORIGINS = ["https://portfolio-ekb3.onrender.com"]
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
 
 LOGGING = {
