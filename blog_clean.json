@@ -6,8 +6,8 @@
       "title": "My First Blog",
       "slug": "my-first-blog",
       "author": 1,
-      "content": "<p>Hello, this is my first blog post!</p>"
+      "content": "<p>Hello</p>",
+      "date_posted": "2024-09-01T12:00:00Z"
     }
   }
 ]
-
