@@ -114,3 +114,8 @@ LOGGING = {
         'level': 'ERROR',
     },
 }
+
+# CSRF trusted origins (important for admin login on Render)
+CSRF_TRUSTED_ORIGINS = [
+    "https://portfolio-ekb3.onrender.com",
+]
