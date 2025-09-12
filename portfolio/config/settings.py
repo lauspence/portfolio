@@ -12,7 +12,7 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-fallback-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com','portfolio-ekb3.onrender.com']  # allow Render domain
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','portfolio-ekb3.onrender.com']  # allow Render domain
 
 # Application definition
 INSTALLED_APPS = [
@@ -102,9 +102,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
 # CSRF trusted origins (important for admin login on Render)
-CSRF_TRUSTED_ORIGINS = [
-    "https://portfolio-ekb3.onrender.com",
-]
+CSRF_TRUSTED_ORIGINS = ["https://portfolio-ekb3.onrender.com"]
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
@@ -119,19 +117,25 @@ LOGGING = {
             'stream': sys.stdout,
         },
     },
-    'root': {
-        'handlers': ['console'],
-        'level': 'ERROR',
-    },
     'loggers': {
         'django': {
             'handlers': ['console'],
-            'level': 'INFO',  # show info logs
+            'level': 'DEBUG',   # was ERROR
             'propagate': True,
         },
-        'django.security.Authentication': {
+        'django.security': {
             'handlers': ['console'],
-            'level': 'DEBUG',  # log authentication attempts
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django.contrib.auth': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
             'propagate': False,
         },
     },
