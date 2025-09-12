@@ -12,7 +12,7 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-fallback-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com']  # allow Render domain
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com','portfolio-ekb3.onrender.com']  # allow Render domain
 
 # Application definition
 INSTALLED_APPS = [
