@@ -57,13 +57,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'portfolio.config.wsgi.application'
 
-# Database (SQLite for now; you can switch to Postgres on Render if needed)
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
+# # Database (SQLite for now; you can switch to Postgres on Render if needed)
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=config('DATABASE_URL')
+#     )
 
-}
+# }
+if DEBUG:  # Local → use SQLite
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:  # Render (production) → use Postgres
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=config('DATABASE_URL')
+        )
+    }
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
