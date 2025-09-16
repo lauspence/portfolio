@@ -1,6 +1,7 @@
-from pathlib import Path
 import os
 import sys
+import dj_database_url
+from pathlib import Path
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -58,10 +59,10 @@ WSGI_APPLICATION = 'portfolio.config.wsgi.application'
 
 # Database (SQLite for now; you can switch to Postgres on Render if needed)
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
+
 }
 
 # Password validation
