@@ -51,6 +51,8 @@
 
           {% if project.image %}
             <img src="{{ project.image.url }}" alt="{{ project.title }} Image" loading="lazy">
+          {% else %}
+            <img src="{% static 'main/image/' %}{{ project.slug }}.png" alt="{{ project.title }} Image" loading="lazy">
           {% endif %}
 
           <p>{{ project.description|default:"No description yet."|truncatewords:32 }}</p>

@@ -170,11 +170,13 @@
   <main class="project-detail">
     <h2>{{ project.title }}</h2>
 
-    {% if project.image %}
-      <div class="main-image-container">
+    <div class="main-image-container">
+      {% if project.image %}
         <img src="{{ project.image.url }}" alt="{{ project.title }} Screenshot">
-      </div>
-    {% endif %}
+      {% else %}
+        <img src="{% static 'main/image/' %}{{ project.slug }}.png" alt="{{ project.title }} Screenshot">
+      {% endif %}
+    </div>
 
     <p class="description">{{ project.description }}</p>
 
