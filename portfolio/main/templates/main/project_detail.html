@@ -24,8 +24,15 @@
           {% if project.image %}
             <img src="{{ project.image.url }}" alt="{{ project.title }} screenshot" class="hero-image" />
           {% else %}
-            <img src="{% static 'main/image/' %}{{ project.slug }}.png" alt="{{ project.title }} screenshot" class="hero-image" />
+            {% if project.slug == 'courier-management-system' %}
+              <img src="{% static 'main/image/courier-mgmt-sys.png' %}" alt="{{ project.title }} screenshot" class="hero-image" />
+            {% elif project.slug == 'garage-management-system' %}
+              <img src="{% static 'main/image/garage-sys.png' %}" alt="{{ project.title }} screenshot" class="hero-image" />
+            {% else %}
+              <img src="{% static 'main/image/default.png' %}" alt="Default Image" class="hero-image" />
+            {% endif %}
           {% endif %}
+
           <div class="hero-badges">
             {% if project.live_demo %}
               <a href="{{ project.live_demo }}" target="_blank" class="badge live">Live</a>
@@ -91,7 +98,7 @@
   </main>
 
   <footer class="pj-footer">
-    <small>© {{ now.year }} Lawrence Marete — Projects</small>
+    <small>© {{ now.year }} Marete — Projects</small>
   </footer>
 </body>
 </html>

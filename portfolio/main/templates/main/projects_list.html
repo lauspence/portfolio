@@ -52,7 +52,13 @@
           {% if project.image %}
             <img src="{{ project.image.url }}" alt="{{ project.title }} Image" loading="lazy">
           {% else %}
-            <img src="{% static 'main/image/' %}{{ project.slug }}.png" alt="{{ project.title }} Image" loading="lazy">
+            {% if project.slug == 'courier-management-system' %}
+              <img src="{% static 'main/image/courier-mgmt-sys.png' %}" alt="{{ project.title }} Image" loading="lazy">
+            {% elif project.slug == 'garage-management-system' %}
+              <img src="{% static 'main/image/garage-sys.png' %}" alt="{{ project.title }} Image" loading="lazy">
+            {% else %}
+              <img src="{% static 'main/image/default.png' %}" alt="Default Image" loading="lazy">
+            {% endif %}
           {% endif %}
 
           <p>{{ project.description|default:"No description yet."|truncatewords:32 }}</p>
