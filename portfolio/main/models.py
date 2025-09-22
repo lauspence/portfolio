@@ -23,7 +23,6 @@ class Project(models.Model):
     tech = models.ManyToManyField(Technology, related_name='projects')
     github = models.URLField(blank=True, null=True)
     live_demo = models.URLField(blank=True, null=True)
-    image = models.ImageField(upload_to='project_images/', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
