@@ -16,6 +16,7 @@ class Project(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, blank=True)
     description = models.TextField()
+    image = models.ImageField(upload_to='project_images/', blank=True, null=True)
     challenge = models.TextField(blank=True, null=True)
     solution = models.TextField(blank=True, null=True)
     role = models.CharField(max_length=100, blank=True, null=True)
