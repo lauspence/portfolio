@@ -49,7 +49,9 @@
         <div class="project-card">
           <h4>{{ project.title }}</h4>
 
-          {% if project.slug == 'courier-management-system' %}
+          {% if project.image %}
+            <img src="{{ project.image.url }}" alt="{{ project.title }} Image" loading="lazy">
+          {% elif project.slug == 'courier-management-system' %}
             <img src="{% static 'main/image/courier-mgmt-sys.png' %}" alt="{{ project.title }} Image" loading="lazy">
           {% elif project.slug == 'garage-management-system' %}
             <img src="{% static 'main/image/garage-sys.png' %}" alt="{{ project.title }} Image" loading="lazy">
@@ -71,9 +73,7 @@
             <a href="{{ project.github }}" class="btn" target="_blank">View on GitHub</a>
           {% endif %}
 
-          {% if project.slug %}
-            <a href="{% url 'project_detail' project.slug %}" class="btn">View Case Study</a>
-          {% endif %}
+          <a href="{% url 'project_detail' project.slug %}" class="btn">View Case Study</a>
         </div>
       {% empty %}
         <p>No projects added yet. Please check back later!</p>

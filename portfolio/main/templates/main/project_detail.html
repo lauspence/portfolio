@@ -21,7 +21,9 @@
     <section class="pj-hero">
       <div class="hero-left">
         <div class="hero-image-wrap">
-          {% if project.slug == 'courier-management-system' %}
+          {% if project.image %}
+            <img src="{{ project.image.url }}" alt="{{ project.title }} screenshot" class="hero-image" />
+          {% elif project.slug == 'courier-management-system' %}
             <img src="{% static 'main/image/courier-mgmt-sys.png' %}" alt="{{ project.title }} screenshot" class="hero-image" />
           {% elif project.slug == 'garage-management-system' %}
             <img src="{% static 'main/image/garage-sys.png' %}" alt="{{ project.title }} screenshot" class="hero-image" />
