@@ -49,8 +49,9 @@
         <div class="project-card">
           <h4>{{ project.title }}</h4>
 
-          {% if project.images.all %}
-            <img src="{{ project.images.all.0.image.url | urlize }}" alt="{{ project.title }} Image" loading="lazy">
+          {# --- Project Image Handling --- #}
+          {% if project.images.exists %}
+            <img src="{{ project.images.first.image.url }}" alt="{{ project.title }} Image" loading="lazy">
           {% elif project.slug == 'courier-management-system' %}
             <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758631005/courier-mgmt-sys_z6bmwo.png" alt="{{ project.title }} Image" loading="lazy">
           {% elif project.slug == 'garage-management-system' %}
@@ -63,7 +64,8 @@
 
           <p>{{ project.description|default:"No description yet."|truncatewords:32 }}</p>
 
-          {% if project.tech.all %}
+          {# --- Tech Stack --- #}
+          {% if project.tech.exists %}
             <div class="tech-stack">
               {% for tech in project.tech.all %}
                 <span class="tech-badge">{{ tech.name }}</span>
@@ -71,10 +73,10 @@
             </div>
           {% endif %}
 
+          {# --- Buttons --- #}
           {% if project.github %}
             <a href="{{ project.github }}" class="btn" target="_blank">View on GitHub</a>
           {% endif %}
-
           <a href="{% url 'project_detail' project.slug %}" class="btn">View Case Study</a>
         </div>
       {% empty %}

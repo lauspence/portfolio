@@ -21,16 +21,18 @@
     <section class="pj-hero">
       <div class="hero-left">
         <div class="hero-image-wrap">
-          {% if project.images.all %}
-            <img src="{{ project.images.all.0.image.url | urlize }}" alt="{{ project.title }} screenshot" class="hero-image" />
-          {% elif project.slug == 'courier-management-system' %}
-            <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758631005/courier-mgmt-sys_z6bmwo.png" alt="{{ project.title }} screenshot" class="hero-image" />
-          {% elif project.slug == 'garage-management-system' %}
-            <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758630999/garage-system_q4rd03.png" alt="{{ project.title }} screenshot" class="hero-image" />
-          {% elif project.slug == 'e-commerce-platform' %}
-            <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758630930/e-commerce_yr1na7.png" alt="{{ project.title }} screenshot" class="hero-image" />
+          {% if project.images.exists %}
+            <img src="{{ project.images.first.image.url }}" alt="{{ project.title }} screenshot" class="hero-image" loading="lazy" />
           {% else %}
-            <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758631002/default_vulh8j.png" alt="Default Image" class="hero-image" />
+            {% if project.slug == 'courier-management-system' %}
+              <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758631005/courier-mgmt-sys_z6bmwo.png" alt="{{ project.title }} screenshot" class="hero-image" loading="lazy" />
+            {% elif project.slug == 'garage-management-system' %}
+              <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758630999/garage-system_q4rd03.png" alt="{{ project.title }} screenshot" class="hero-image" loading="lazy" />
+            {% elif project.slug == 'e-commerce-platform' %}
+              <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758630930/e-commerce_yr1na7.png" alt="{{ project.title }} screenshot" class="hero-image" loading="lazy" />
+            {% else %}
+              <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758631002/default_vulh8j.png" alt="Default Image" class="hero-image" loading="lazy" />
+            {% endif %}
           {% endif %}
 
           <div class="hero-badges">
@@ -58,7 +60,7 @@
             {% for tech in project.tech.all %}
               <li class="tech-pill">
                 {% if tech.icon %}
-                  <img src="{{ tech.icon.url | urlize }}" alt="{{ tech.name }}" class="tech-icon" />
+                  <img src="{{ tech.icon.url }}" alt="{{ tech.name }}" class="tech-icon" loading="lazy" />
                 {% endif %}
                 <span>{{ tech.name }}</span>
               </li>
@@ -80,17 +82,19 @@
       </aside>
     </section>
 
-    {% if project.images.all %}
+    {% if project.images.exists %}
       <section class="gallery-section">
         <h3 class="section-title">Screenshots</h3>
         <div class="gallery-grid">
           {% for img in project.images.all %}
-            <figure class="gallery-card">
-              <img src="{{ img.image.url | urlize }}" alt="{{ img.caption|default:project.title }}" class="gallery-img" />
-              {% if img.caption %}
-                <figcaption class="caption">{{ img.caption }}</figcaption>
-              {% endif %}
-            </figure>
+            {% if img.image %}
+              <figure class="gallery-card">
+                <img src="{{ img.image.url }}" alt="{{ img.caption|default:project.title }}" class="gallery-img" loading="lazy" />
+                {% if img.caption %}
+                  <figcaption class="caption">{{ img.caption }}</figcaption>
+                {% endif %}
+              </figure>
+            {% endif %}
           {% endfor %}
         </div>
       </section>
