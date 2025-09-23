@@ -2,12 +2,14 @@
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
-from cloudinary.models import CloudinaryField
 
+# ========================
+# Models
+# ========================
 
 class Technology(models.Model):
     name = models.CharField(max_length=100)
-    icon = models.ImageField(upload_to='tech_icons/', blank=True, null=True)  
+    icon = models.ImageField(upload_to='tech_icons/', blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -17,8 +19,10 @@ class Project(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, blank=True)
     description = models.TextField()
-    # image = models.ImageField(upload_to='project_images/', blank=True, null=True)
-    image = CloudinaryField('image', blank=True, null=True)
+    
+    # Either upload an image or paste a URL
+    image = models.URLField(blank=True, null=True, help_text="Paste a Cloudinary image URL here")
+
     challenge = models.TextField(blank=True, null=True)
     solution = models.TextField(blank=True, null=True)
     role = models.CharField(max_length=100, blank=True, null=True)
@@ -36,10 +40,9 @@ class Project(models.Model):
         return self.title
 
 
-    
 class ProjectImage(models.Model):
-    project = models.ForeignKey('Project', on_delete=models.CASCADE, related_name='images')
-    image = CloudinaryField('image', blank=True, null=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='images')
+    image = models.URLField(blank=True, null=True, help_text="Paste a Cloudinary image URL here")
     caption = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
@@ -51,7 +54,7 @@ class BlogPost(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     content = RichTextField()
-    image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
+    image = models.URLField(blank=True, null=True, help_text="Paste a Cloudinary image URL here")
     category = models.CharField(max_length=100, blank=True, null=True)
     tags = models.CharField(max_length=200, blank=True, null=True)
     date_posted = models.DateTimeField(auto_now_add=True)
@@ -63,16 +66,18 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return f"{self.title} by {self.author}"
-    
+
+
 class Testimonial(models.Model):
     name = models.CharField(max_length=100)
     message = models.TextField()
     role = models.CharField(max_length=100, blank=True)
-    image = models.ImageField(upload_to='testimonials/', blank=True, null=True)
+    image = models.URLField(blank=True, null=True, help_text="Paste a Cloudinary image URL here")
 
     def __str__(self):
         return f"{self.name} - {self.role}"
-    
+
+
 class ContactMessage(models.Model):
     name = models.CharField(max_length=150)
     email = models.EmailField()
