@@ -2,6 +2,7 @@
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
+from cloudinary.models import CloudinaryField
 
 
 class Technology(models.Model):
@@ -16,7 +17,8 @@ class Project(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, blank=True)
     description = models.TextField()
-    image = models.ImageField(upload_to='project_images/', blank=True, null=True)
+    # image = models.ImageField(upload_to='project_images/', blank=True, null=True)
+    image = CloudinaryField('image', blank=True, null=True)
     challenge = models.TextField(blank=True, null=True)
     solution = models.TextField(blank=True, null=True)
     role = models.CharField(max_length=100, blank=True, null=True)
@@ -37,7 +39,7 @@ class Project(models.Model):
     
 class ProjectImage(models.Model):
     project = models.ForeignKey('Project', on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='project_images/')
+    image = CloudinaryField('image', blank=True, null=True)
     caption = models.CharField(max_length=200, blank=True)
 
     def __str__(self):

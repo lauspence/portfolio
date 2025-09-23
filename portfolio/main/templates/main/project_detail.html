@@ -21,8 +21,10 @@
     <section class="pj-hero">
       <div class="hero-left">
         <div class="hero-image-wrap">
-          {% if project.images.all %}
-            <img src="{{ project.images.all.0.image.url }}" alt="{{ project.title }}" class="hero-image" />
+          {% if project.image %}
+            <img src="{{ project.image.url }}" alt="{{ project.title }} screenshot" class="hero-image" />
+          {% elif project.images.all %}
+            <img src="{{ project.images.all.0.image.url }}" alt="{{ project.title }} screenshot" class="hero-image" />
           {% else %}
             <img src="{% static 'main/image/default.png' %}" alt="Default Image" class="hero-image" />
           {% endif %}
