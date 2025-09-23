@@ -22,13 +22,7 @@
       <div class="hero-left">
         <div class="hero-image-wrap">
           {% if project.images.all %}
-            <img src="{{ project.images.all.0.image.url }}" alt="{{ project.title }} screenshot" class="hero-image" />
-          {% elif project.slug == 'courier-management-system' %}
-            <img src="{% static 'main/image/courier-mgmt-sys.png' %}" alt="{{ project.title }} screenshot" class="hero-image" />
-          {% elif project.slug == 'garage-management-system' %}
-            <img src="{% static 'main/image/garage-system.png' %}" alt="{{ project.title }} screenshot" class="hero-image" />
-          {% elif project.slug == 'e-commerce-platform' %}
-            <img src="{% static 'main/image/e-commerce.png' %}" alt="{{ project.title }} screenshot" class="hero-image" />
+            <img src="{{ project.images.all.0.image.url }}" alt="{{ project.title }}" class="hero-image" />
           {% else %}
             <img src="{% static 'main/image/default.png' %}" alt="Default Image" class="hero-image" />
           {% endif %}

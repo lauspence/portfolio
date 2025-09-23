@@ -8,35 +8,25 @@
   <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
   <style>
     .project-card img {
-      width:100%;
-      height:220px;
-      object-fit:cover;
-      border-radius:8px;
-      margin-bottom:12px;
-      transition:transform .3s ease, box-shadow .3s ease;
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      transition: transform .3s ease, box-shadow .3s ease;
     }
     .project-card img:hover {
-      transform:scale(1.03);
-      box-shadow:0 8px 20px rgba(255,111,145,0.35);
+      transform: scale(1.03);
+      box-shadow: 0 8px 20px rgba(255,111,145,0.35);
     }
     .tech-badge {
-      display:inline-block;
-      background:#ff6f91;
-      color:#fff;
-      padding:4px 10px;
-      border-radius:6px;
-      font-size:.8rem;
-      margin:0 6px 6px 0;
-    }
-    .btn {
-      display:inline-block;
-      margin:6px 6px 0 0;
-      padding:6px 12px;
-      border-radius:4px;
-      text-decoration:none;
-      color:#fff;
-      background:#ff6f91;
-      font-size:.85rem;
+      display: inline-block;
+      background: #ff6f91;
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: .8rem;
+      margin: 0 6px 6px 0;
     }
   </style>
 </head>
@@ -59,14 +49,9 @@
         <div class="project-card">
           <h4>{{ project.title }}</h4>
 
+          {# Use uploaded image first, else default #}
           {% if project.images.all %}
             <img src="{{ project.images.all.0.image.url }}" alt="{{ project.title }} Image" loading="lazy">
-          {% elif project.slug == 'courier-management-system' %}
-            <img src="{% static 'main/image/courier-mgmt-sys.png' %}" alt="{{ project.title }} Image" loading="lazy">
-          {% elif project.slug == 'garage-management-system' %}
-            <img src="{% static 'main/image/garage-system.png' %}" alt="{{ project.title }} Image" loading="lazy">
-          {% elif project.slug == 'e-commerce-platform' %}
-            <img src="{% static 'main/image/e-commerce.png' %}" alt="{{ project.title }} Image" loading="lazy">
           {% else %}
             <img src="{% static 'main/image/default.png' %}" alt="Default Image" loading="lazy">
           {% endif %}
@@ -81,11 +66,12 @@
             </div>
           {% endif %}
 
-          {% if project.github %}
-            <a href="{{ project.github }}" class="btn" target="_blank">View on GitHub</a>
-          {% endif %}
-
-          <a href="{% url 'project_detail' project.slug %}" class="btn">View Case Study</a>
+          <div class="actions">
+            {% if project.github %}
+              <a href="{{ project.github }}" class="btn" target="_blank">View on GitHub</a>
+            {% endif %}
+            <a href="{% url 'project_detail' project.slug %}" class="btn">View Case Study</a>
+          </div>
         </div>
       {% empty %}
         <p>No projects added yet. Please check back later!</p>
