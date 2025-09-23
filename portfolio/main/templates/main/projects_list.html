@@ -49,12 +49,14 @@
         <div class="project-card">
           <h4>{{ project.title }}</h4>
 
-          {% if project.image %}
-            <img src="{{ project.image.url }}" alt="{{ project.title }} Image" loading="lazy">
+          {% if project.images.all %}
+            <img src="{{ project.images.all.0.image.url }}" alt="{{ project.title }} Image" loading="lazy">
           {% elif project.slug == 'courier-management-system' %}
             <img src="{% static 'main/image/courier-mgmt-sys.png' %}" alt="{{ project.title }} Image" loading="lazy">
           {% elif project.slug == 'garage-management-system' %}
-            <img src="{% static 'main/image/garage-sys.png' %}" alt="{{ project.title }} Image" loading="lazy">
+            <img src="{% static 'main/image/garage-system.png' %}" alt="{{ project.title }} Image" loading="lazy">
+          {% elif project.slug == 'e-commerce-platform' %}
+            <img src="{% static 'main/image/e-commerce.png' %}" alt="{{ project.title }} screenshot" class="hero-image" />  
           {% else %}
             <img src="{% static 'main/image/default.png' %}" alt="Default Image" loading="lazy">
           {% endif %}
