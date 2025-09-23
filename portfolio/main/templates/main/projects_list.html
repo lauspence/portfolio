@@ -13,7 +13,7 @@
       object-fit:cover;
       border-radius:8px;
       margin-bottom:12px;
-      transition: transform .3s ease, box-shadow .3s ease;
+      transition:transform .3s ease, box-shadow .3s ease;
     }
     .project-card img:hover {
       transform:scale(1.03);
@@ -49,12 +49,16 @@
         <div class="project-card">
           <h4>{{ project.title }}</h4>
 
-          {% if project.image %}
-            <img src="{{ project.image.url }}" alt="{{ project.title }} Image" loading="lazy">
-          {% elif project.images.all %}
-            <img src="{{ project.images.all.0.image.url }}" alt="{{ project.title }} Image" loading="lazy">
+          {% if project.images.all %}
+            <img src="{{ project.images.all.0.image.url | urlize }}" alt="{{ project.title }} Image" loading="lazy">
+          {% elif project.slug == 'courier-management-system' %}
+            <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758631005/courier-mgmt-sys_z6bmwo.png" alt="{{ project.title }} Image" loading="lazy">
+          {% elif project.slug == 'garage-management-system' %}
+            <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758630999/garage-system_q4rd03.png" alt="{{ project.title }} Image" loading="lazy">
+          {% elif project.slug == 'e-commerce-platform' %}
+            <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758630930/e-commerce_yr1na7.png" alt="{{ project.title }} screenshot" loading="lazy">
           {% else %}
-            <img src="{% static 'main/image/default.png' %}" alt="Default Image" loading="lazy">
+            <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758631002/default_vulh8j.png" alt="Default Image" loading="lazy">
           {% endif %}
 
           <p>{{ project.description|default:"No description yet."|truncatewords:32 }}</p>
