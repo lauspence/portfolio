@@ -22,12 +22,36 @@
     .tech-badge {
       display:inline-block;
       background:#ff6f91;
-      color:#fff;
       padding:4px 10px;
       border-radius:6px;
       font-size:.8rem;
       margin:0 6px 6px 0;
+      color: #fff;
     }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 8px 6px 0 0;
+      background-color: #3c80f6;
+      color: #fff;
+      padding: 8px 14px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #295dc0;
+    }
+
   </style>
 </head>
 <body>
@@ -54,7 +78,7 @@
             <img src="{{ project.images.first.image }}" alt="{{ project.title }} Image" loading="lazy">
           {% elif project.slug == 'courier-management-system' %}
             <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758631005/courier-mgmt-sys_z6bmwo.png" alt="{{ project.title }} Image" loading="lazy">
-          {% elif project.slug == 'garage-management-system' %}
+          {% elif project.slug == 'garage-management-billing-system' %}
             <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758630999/garage-system_q4rd03.png" alt="{{ project.title }} Image" loading="lazy">
           {% elif project.slug == 'e-commerce-platform' %}
             <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758630930/e-commerce_yr1na7.png" alt="{{ project.title }} screenshot" loading="lazy">
@@ -72,12 +96,13 @@
               {% endfor %}
             </div>
           {% endif %}
-
+        <div class="project-buttons">
           {# --- Buttons --- #}
           {% if project.github %}
             <a href="{{ project.github }}" class="btn" target="_blank">View on GitHub</a>
           {% endif %}
-          <a href="{% url 'project_detail' slug=project.slug %}" class="btn">View Case Study</a>
+            <a href="{% url 'project_detail' slug=project.slug %}" class="btn">View Case Study</a>
+        </div>
         </div>
       {% empty %}
         <p>No projects added yet. Please check back later!</p>

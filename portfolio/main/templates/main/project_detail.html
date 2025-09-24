@@ -6,6 +6,207 @@
   <title>{{ project.title }}</title>
   <link rel="stylesheet" href="{% static 'main/css/style.css' %}" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    /* Theme (purple gradient background like other pages) */
+    body.pj-body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: #333;
+    }
+
+    /* Header */
+    .pj-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      background:linear-gradient(145deg, #1a1a3d, #3a1c71, #d76d77); ;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .pj-logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #6a11cb;
+      text-decoration: none;
+    }
+
+    .pj-nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: #444;
+      font-weight: 500;
+    }
+
+    /* Hero Section */
+    .pj-container {
+      padding: 3rem 5% 2rem;
+    }
+
+    .pj-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+    }
+
+    .hero-image {
+      width: 100%;
+      max-width: 550px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+      display: block;
+    }
+
+    .hero-badges {
+      margin-top: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 6px;
+      margin-right: 0.6rem;
+      text-decoration: none;
+      color: white;
+    }
+    .badge.live { background: #6a11cb; }
+    .badge.code { background: #2575fc; }
+
+    .pj-title {
+      font-size: 2rem;
+      color: #6a11cb;
+      margin-bottom: 0.5rem;
+    }
+
+    .pj-excerpt {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      color: #222;
+    }
+
+    .tech-section {
+      margin-top: 1.5rem;
+    }
+    .section-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      color: #6a11cb;
+    }
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .tech-pill {
+      background: rgba(106,17,203,0.1);
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .tech-icon {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+    }
+
+    .actions {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+    }
+    .btn.primary { background: #6a11cb; color: white; }
+    .btn.primary:hover { background: #5b0fb5; }
+    .btn.outline { border: 2px solid #d4177fff; color: #fc2589ff; }
+    .btn.ghost { background: transparent; color: #444; }
+
+    /* Carousel for Screenshots */
+    .gallery-section {
+      margin-top: 3rem;
+      text-align: center;
+    }
+    .gallery-section .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      scroll-behavior: smooth;
+      padding-bottom: 1rem;
+      justify-content: center;
+    }
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+    .gallery-card {
+      flex: 0 0 auto;
+      width: 350px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+    .gallery-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .caption {
+      padding: 0.5rem;
+      font-size: 0.9rem;
+      background: #f9f9f9;
+      color: #555;
+    }
+
+    /* Footer */
+    .pj-footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: white;
+      margin-top: 3rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .pj-hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-image {
+        max-width: 100%;
+      }
+      .gallery-card {
+        width: 80%;
+      }
+    }
+  </style>
 </head>
 <body class="pj-body">
   <header class="pj-header">
@@ -24,15 +225,7 @@
           {% if project.images.exists %}
             <img src="{{ project.images.first.image }}" alt="{{ project.title }} screenshot" class="hero-image" loading="lazy" />
           {% else %}
-            {% if project.slug == 'courier-management-system' %}
-              <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758631005/courier-mgmt-sys_z6bmwo.png" alt="{{ project.title }} screenshot" class="hero-image" loading="lazy" />
-            {% elif project.slug == 'garage-management-system' %}
-              <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758630999/garage-system_q4rd03.png" alt="{{ project.title }} screenshot" class="hero-image" loading="lazy" />
-            {% elif project.slug == 'e-commerce-platform' %}
-              <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758630930/e-commerce_yr1na7.png" alt="{{ project.title }} screenshot" class="hero-image" loading="lazy" />
-            {% else %}
-              <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758631002/default_vulh8j.png" alt="Default Image" class="hero-image" loading="lazy" />
-            {% endif %}
+            <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758631002/default_vulh8j.png" alt="Default Image" class="hero-image" loading="lazy" />
           {% endif %}
 
           <div class="hero-badges">
@@ -43,10 +236,6 @@
               <a href="{{ project.github }}" target="_blank" class="badge code">Source</a>
             {% endif %}
           </div>
-        </div>
-        <div class="meta-row">
-          <span class="meta-item">Slug: {{ project.slug }}</span>
-          <span class="meta-item">Updated: {{ project.updated_at|date:"F j, Y" }}</span>
         </div>
       </div>
 
@@ -85,7 +274,7 @@
     {% if project.images.exists %}
       <section class="gallery-section">
         <h3 class="section-title">Screenshots</h3>
-        <div class="gallery-grid">
+        <div class="carousel">
           {% for img in project.images.all %}
             {% if img.image %}
               <figure class="gallery-card">
