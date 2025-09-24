@@ -22,7 +22,7 @@
       <div class="hero-left">
         <div class="hero-image-wrap">
           {% if project.images.exists %}
-            <img src="{{ project.images.first.image.url }}" alt="{{ project.title }} screenshot" class="hero-image" loading="lazy" />
+            <img src="{{ project.images.first.image }}" alt="{{ project.title }} screenshot" class="hero-image" loading="lazy" />
           {% else %}
             {% if project.slug == 'courier-management-system' %}
               <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758631005/courier-mgmt-sys_z6bmwo.png" alt="{{ project.title }} screenshot" class="hero-image" loading="lazy" />
@@ -60,7 +60,7 @@
             {% for tech in project.tech.all %}
               <li class="tech-pill">
                 {% if tech.icon %}
-                  <img src="{{ tech.icon.url }}" alt="{{ tech.name }}" class="tech-icon" loading="lazy" />
+                  <img src="{{ tech.icon }}" alt="{{ tech.name }}" class="tech-icon" loading="lazy" />
                 {% endif %}
                 <span>{{ tech.name }}</span>
               </li>
@@ -89,7 +89,7 @@
           {% for img in project.images.all %}
             {% if img.image %}
               <figure class="gallery-card">
-                <img src="{{ img.image.url }}" alt="{{ img.caption|default:project.title }}" class="gallery-img" loading="lazy" />
+                <img src="{{ img.image }}" alt="{{ img.caption|default:project.title }}" class="gallery-img" loading="lazy" />
                 {% if img.caption %}
                   <figcaption class="caption">{{ img.caption }}</figcaption>
                 {% endif %}

@@ -51,7 +51,7 @@
 
           {# --- Project Image Handling --- #}
           {% if project.images.exists %}
-            <img src="{{ project.images.first.image.url }}" alt="{{ project.title }} Image" loading="lazy">
+            <img src="{{ project.images.first.image }}" alt="{{ project.title }} Image" loading="lazy">
           {% elif project.slug == 'courier-management-system' %}
             <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758631005/courier-mgmt-sys_z6bmwo.png" alt="{{ project.title }} Image" loading="lazy">
           {% elif project.slug == 'garage-management-system' %}
