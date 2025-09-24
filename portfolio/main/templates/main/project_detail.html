@@ -3,11 +3,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>{{ project.title }}</title>
+  <title>{{ project.title }} | Portfolio</title>
   <link rel="stylesheet" href="{% static 'main/css/style.css' %}" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    /* Theme (purple gradient background like other pages) */
+    /* --- Body & Theme --- */
     body.pj-body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -15,13 +15,13 @@
       color: #333;
     }
 
-    /* Header */
+    /* --- Header --- */
     .pj-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 5%;
-      background:linear-gradient(145deg, #1a1a3d, #3a1c71, #d76d77); ;
+      background: linear-gradient(145deg, #1a1a3d, #3a1c71, #d76d77);
       box-shadow: 0 2px 5px rgba(0,0,0,0.08);
       position: sticky;
       top: 0;
@@ -31,20 +31,22 @@
     .pj-logo {
       font-size: 1.4rem;
       font-weight: bold;
-      color: #6a11cb;
+      color: #fff;
       text-decoration: none;
     }
 
     .pj-nav a {
       margin-left: 1.5rem;
       text-decoration: none;
-      color: #444;
+      color: #fff;
       font-weight: 500;
+      transition: color 0.3s;
     }
+    .pj-nav a:hover { color: #ffddf7; }
 
-    /* Hero Section */
+    /* --- Hero Section --- */
     .pj-container {
-      padding: 3rem 5% 2rem;
+      padding: 4rem 5% 2rem; /* added top spacing from navbar */
     }
 
     .pj-hero {
@@ -54,8 +56,16 @@
       align-items: start;
     }
 
+    .hero-left {
+      text-align: center;
+    }
+
     .hero-image-wrap {
       position: relative;
+    }
+
+    .hero-image-link {
+      display: inline-block;
     }
 
     .hero-image {
@@ -65,12 +75,13 @@
       border-radius: 10px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.15);
       display: block;
+      transition: transform 0.3s ease;
     }
+    .hero-image:hover { transform: scale(1.02); }
 
     .hero-badges {
       margin-top: 1rem;
     }
-
     .badge {
       display: inline-block;
       padding: 0.4rem 0.9rem;
@@ -84,9 +95,10 @@
     .badge.live { background: #6a11cb; }
     .badge.code { background: #2575fc; }
 
+    /* --- Hero Right --- */
     .pj-title {
       font-size: 2rem;
-      color: #6a11cb;
+      color: #fff;
       margin-bottom: 0.5rem;
     }
 
@@ -94,7 +106,7 @@
       font-size: 1.05rem;
       line-height: 1.6;
       margin-bottom: 1.5rem;
-      color: #222;
+      color: #f3f3f3;
     }
 
     .tech-section {
@@ -103,7 +115,7 @@
     .section-title {
       font-size: 1.2rem;
       margin-bottom: 0.8rem;
-      color: #6a11cb;
+      color: #ffddf7;
     }
     .tech-list {
       display: flex;
@@ -114,12 +126,13 @@
       margin: 0;
     }
     .tech-pill {
-      background: rgba(106,17,203,0.1);
+      background: rgba(255, 255, 255, 0.15);
       padding: 0.4rem 0.8rem;
       border-radius: 20px;
       display: flex;
       align-items: center;
       gap: 0.4rem;
+      color: #fff;
     }
     .tech-icon {
       width: 18px;
@@ -127,6 +140,7 @@
       object-fit: contain;
     }
 
+    /* --- Buttons --- */
     .actions {
       margin-top: 2rem;
       display: flex;
@@ -143,10 +157,11 @@
     }
     .btn.primary { background: #6a11cb; color: white; }
     .btn.primary:hover { background: #5b0fb5; }
-    .btn.outline { border: 2px solid #d4177fff; color: #fc2589ff; }
-    .btn.ghost { background: transparent; color: #444; }
+    .btn.outline { border: 2px solid #ffddf7; color: #ffddf7; }
+    .btn.outline:hover { background: #ffddf7; color: #6a11cb; }
+    .btn.ghost { background: transparent; color: #fff; }
 
-    /* Carousel for Screenshots */
+    /* --- Carousel for Screenshots --- */
     .gallery-section {
       margin-top: 3rem;
       text-align: center;
@@ -154,6 +169,7 @@
     .gallery-section .section-title {
       font-size: 1.5rem;
       margin-bottom: 1rem;
+      color: #fff;
     }
     .carousel {
       display: flex;
@@ -168,12 +184,14 @@
     }
     .gallery-card {
       flex: 0 0 auto;
-      width: 350px;
+      width: 400px;
       border-radius: 10px;
       overflow: hidden;
       background: white;
       box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
     }
+    .gallery-card:hover { transform: scale(1.02); }
     .gallery-img {
       width: 100%;
       height: auto;
@@ -186,7 +204,7 @@
       color: #555;
     }
 
-    /* Footer */
+    /* --- Footer --- */
     .pj-footer {
       text-align: center;
       padding: 1.5rem;
@@ -195,7 +213,7 @@
       margin-top: 3rem;
     }
 
-    /* Responsive */
+    /* --- Responsive --- */
     @media (max-width: 768px) {
       .pj-hero {
         grid-template-columns: 1fr;
@@ -224,7 +242,9 @@
       <div class="hero-left">
         <div class="hero-image-wrap">
           {% if project.images.exists %}
-            <img src="{{ project.images.first.image }}" alt="{{ project.title }} screenshot" class="hero-image" loading="lazy" />
+            <a href="{{ project.images.first.image }}" class="hero-image-link" target="_blank">
+              <img src="{{ project.images.first.image }}" alt="{{ project.title }} screenshot" class="hero-image" loading="lazy" />
+            </a>
           {% else %}
             <img src="https://res.cloudinary.com/dlkqnuwed/image/upload/v1758631002/default_vulh8j.png" alt="Default Image" class="hero-image" loading="lazy" />
           {% endif %}
