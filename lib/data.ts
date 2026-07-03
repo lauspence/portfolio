@@ -5,8 +5,7 @@ export const profile = {
   location: "Nairobi, Kenya",
   image: "/profile.jpg",
   email: "laurencemmarete@gmail.com",
-  phone: "+254722368336",
-  whatsapp: "https://wa.me/254722368336",
+  phone: "+254769281993",
   linkedin: "https://linkedin.com/in/lawrence-marete-a6774927a",
   github: "https://github.com/lauspence",
   summary:

@@ -1,4 +1,4 @@
-import { Mail, Phone, MessageCircle } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import { profile } from "@/lib/data";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 
@@ -29,15 +29,6 @@ export default function Contact() {
           >
             <Phone size={16} />
             {profile.phone}
-          </a>
-          <a
-            href={profile.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground transition hover:border-emerald-500/50 hover:text-emerald-400"
-          >
-            <MessageCircle size={16} />
-            WhatsApp
           </a>
         </div>
 
