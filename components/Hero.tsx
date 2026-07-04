@@ -1,4 +1,4 @@
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, Download, MapPin } from "lucide-react";
 import Image from "next/image";
 import { profile } from "@/lib/data";
 
@@ -38,6 +38,14 @@ export default function Hero() {
                 className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground transition hover:border-accent/50 hover:text-accent"
               >
                 Get in Touch
+              </a>
+              <a
+                href="/Lawrence-Marete-CV.pdf"
+                download
+                className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground transition hover:border-accent/50 hover:text-accent"
+              >
+                Download CV
+                <Download size={16} />
               </a>
             </div>
           </div>
